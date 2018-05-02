@@ -1,4 +1,4 @@
-import {Controller, Get, HttpCode, Param, Post} from "@nestjs/common";
+import {Controller, Get, HttpCode, Param, Post, Req, Res} from "@nestjs/common";
 
 @Controller('Pelicula')
 export class AppPeliculaController {
@@ -11,7 +11,7 @@ export class AppPeliculaController {
 
     @Post('mostrarCartelera/:nombre/:estreno')
     @HttpCode(203)
-    anadirACartelera(@Param() parametros: Pelicula) {
+    anadirACartelera(@Param() parametros) {
 
         this.peliculas
             .push(new Pelicula(
@@ -20,6 +20,20 @@ export class AppPeliculaController {
             );
 
         return this.peliculas;
+    }
+
+    @Post('mostrarCartelera')
+    @HttpCode(201)
+    anadirACarteleraConQueryParameters(
+        @Req() req,
+        @Res() res) {
+        const paramtrosQuery = req.query;
+        this.peliculas
+            .push(new Pelicula(
+                paramtrosQuery.nombre,
+                paramtrosQuery.estreno)
+            );
+        return res.send(this.peliculas);
     }
 }
 
