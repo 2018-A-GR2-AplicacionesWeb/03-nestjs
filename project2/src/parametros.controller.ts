@@ -1,7 +1,14 @@
 import {Body, Controller, Get, Headers, Param, Post, Query, Req, Res} from "@nestjs/common";
+import {Usuario, UsuarioService} from "./usuario.service";
 
 @Controller('Parametros')
 export class ParametrosController {
+
+
+    constructor(private _usuarioService:UsuarioService) {
+
+    }
+
 
     @Post('recuperar/:id/:materia')
     recuperarParametros(
@@ -60,6 +67,48 @@ export class ParametrosController {
         //172.31.104.93
         return response.redirect('/Pelicula/mostrarCartelera');//Url relativa
     }
+
+    @Get('recuperarUsuarios')
+    recuperarUsuarios(){
+        return this._usuarioService.arregloUsuarios
+    }
+
+    @Post('anadirUsuario')
+    anadirUsuario(
+        @Body() bodyParams
+    ){
+        const usuario = new Usuario(bodyParams.nombre,bodyParams.apellido,bodyParams.edad);
+        // const usuario = {
+        //     nombre:bodyParams.nombre,
+        //     apellido:bodyParams.apellido,
+        //     edad:bodyParams.edad,
+        // };
+        return this._usuarioService.agregarUsuario(usuario)
+    }
+
+    @Post('anadirUsuario')
+    anadirUsuario(
+        @Body() bodyParams
+    ){
+        const usuario = new Usuario(bodyParams.nombre,bodyParams.apellido,bodyParams.edad);
+        // const usuario = {
+        //     nombre:bodyParams.nombre,
+        //     apellido:bodyParams.apellido,
+        //     edad:bodyParams.edad,
+        // };
+        return this._usuarioService.agregarUsuario(usuario)
+    }
+
+
+
+
+
+
+
+
+
+
+
 }
 
 
