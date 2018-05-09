@@ -57,7 +57,8 @@ export class ParametrosController {
             headers,
         };
         console.log(respuesta);
-        return response.redirect(200,'/Pelicula/mostrarCartelera');//Url relativa
+        //172.31.104.93
+        return response.redirect('/Pelicula/mostrarCartelera');//Url relativa
     }
 }
 
