@@ -57,7 +57,7 @@ export class ParametrosController {
             headers,
         };
         console.log(respuesta);
-        return response.send(respuesta);
+        return response.redirect(200,'/Pelicula/mostrarCartelera');//Url relativa
     }
 }
 
