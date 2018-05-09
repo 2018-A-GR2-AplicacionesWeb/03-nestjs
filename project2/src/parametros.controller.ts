@@ -1,11 +1,11 @@
-import {Body, Controller, Get, Headers, Param, Post, Query, Req, Res} from "@nestjs/common";
+import {Body, Controller, Delete, Get, Headers, Param, Post, Query, Req, Res} from "@nestjs/common";
 import {Usuario, UsuarioService} from "./usuario.service";
 
 @Controller('Parametros')
 export class ParametrosController {
 
 
-    constructor(private _usuarioService:UsuarioService) {
+    constructor(private _usuarioService: UsuarioService) {
 
     }
 
@@ -69,15 +69,15 @@ export class ParametrosController {
     }
 
     @Get('recuperarUsuarios')
-    recuperarUsuarios(){
+    recuperarUsuarios() {
         return this._usuarioService.arregloUsuarios
     }
 
     @Post('anadirUsuario')
     anadirUsuario(
         @Body() bodyParams
-    ){
-        const usuario = new Usuario(bodyParams.nombre,bodyParams.apellido,bodyParams.edad);
+    ) {
+        const usuario = new Usuario(bodyParams.nombre, bodyParams.apellido, bodyParams.edad);
         // const usuario = {
         //     nombre:bodyParams.nombre,
         //     apellido:bodyParams.apellido,
@@ -86,27 +86,14 @@ export class ParametrosController {
         return this._usuarioService.agregarUsuario(usuario)
     }
 
-    @Post('anadirUsuario')
-    anadirUsuario(
+    @Delete('borrarUsuario')
+    borrarUsuario(
         @Body() bodyParams
-    ){
-        const usuario = new Usuario(bodyParams.nombre,bodyParams.apellido,bodyParams.edad);
-        // const usuario = {
-        //     nombre:bodyParams.nombre,
-        //     apellido:bodyParams.apellido,
-        //     edad:bodyParams.edad,
-        // };
-        return this._usuarioService.agregarUsuario(usuario)
+    ) {
+        const usuario = new Usuario(bodyParams.nombre, bodyParams.apellido, bodyParams.edad);
+
+        return this._usuarioService.borrarUsuario(usuario)
     }
-
-
-
-
-
-
-
-
-
 
 
 }
