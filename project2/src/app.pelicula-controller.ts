@@ -1,8 +1,14 @@
-import {Controller, Get, HttpCode, Param, Post, Req, Res} from "@nestjs/common";
+import {Body, Controller, Delete, Get, HttpCode, Param, Post, Req, Res} from "@nestjs/common";
+import {Usuario, UsuarioService} from "./usuario.service";
 
 @Controller('Pelicula')
 export class AppPeliculaController {
     peliculas: Pelicula[] = [];
+
+    constructor(private _usuarioService: UsuarioService) {
+
+    }
+
 
     @Get('mostrarCartelera')
     mostrarCartelera() {
@@ -35,6 +41,35 @@ export class AppPeliculaController {
             );
         return res.send(this.peliculas);
     }
+
+
+    @Get('recuperarUsuarios')
+    recuperarUsuarios() {
+        return this._usuarioService.arregloUsuarios
+    }
+
+    @Post('anadirUsuario')
+    anadirUsuario(
+        @Body() bodyParams
+    ) {
+        const usuario = new Usuario(bodyParams.nombre, bodyParams.apellido, bodyParams.edad);
+        // const usuario = {
+        //     nombre:bodyParams.nombre,
+        //     apellido:bodyParams.apellido,
+        //     edad:bodyParams.edad,
+        // };
+        return this._usuarioService.agregarUsuario(usuario)
+    }
+
+    @Delete('borrarUsuario')
+    borrarUsuario(
+        @Body() bodyParams
+    ) {
+        const usuario = new Usuario(bodyParams.nombre, bodyParams.apellido, bodyParams.edad);
+
+        return this._usuarioService.borrarUsuario(usuario)
+    }
+
 }
 
 class Pelicula {
