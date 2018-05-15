@@ -66,9 +66,19 @@ export class UsuarioController {
     ) {
         const nombreCookie = request.params.nombreCookie;
 
-        request.cookie(nombreCookie);
+        const existeCookie = request.cookies[nombreCookie];
 
-        return response.send();
+        if (existeCookie) {
+            return response.send(existeCookie);
+        } else {
+            return response
+                .status(400)
+                .send({mensaje: 'No existe cookie', status: 400})
+        }
+        //request.cookie["hola"];
+        //request.cookie.hola;
+
+
     }
 
 }
