@@ -6,8 +6,21 @@ import {UsuarioService} from "./usuario.service";
 import {LogMiddleware} from "./log.middleware";
 import {UsuarioController} from "./usuario.controller";
 
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 @Module({
-    imports: [], // Importar otros modulos
+    imports: [
+        TypeOrmModule.forRoot({
+            type: 'mysql',
+            host: '172.31.104.77',
+            port: 3306,
+            username: 'root',
+            password: 'root',
+            database: 'web',
+            entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+            synchronize: true,
+        }),
+    ], // Importar otros modulos
     controllers: [
         AppController,
         AppPeliculaController,
