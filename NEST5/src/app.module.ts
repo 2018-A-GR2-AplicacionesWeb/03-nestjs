@@ -8,16 +8,13 @@ import {UsuarioEntity} from "./usuario/usuario.entity";
     imports: [
         TypeOrmModule.forRoot({
             type: 'mysql',
-            host: 'web2018agr2.mysql.database.azure.com',
+            host: 'localhost',
             port: 3306,
-            username: 'profesor',
-            password: 'Javascript1',
-            database: 'mysql',
+            username: 'root',
+            password: 'root',
+            database: 'web2',
             entities: [__dirname + '/../**/*.entity{.ts,.js}'],
             synchronize: true,
-            extra: {
-                ssl: true
-            }
         }),
         TypeOrmModule.forFeature([UsuarioEntity])
     ],
