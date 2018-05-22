@@ -1,6 +1,6 @@
 import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
-@Entity('web_usuario_adrian')
+@Entity('web_gr2_eguezv')
 export class UsuarioEntity {
 
     @PrimaryGeneratedColumn()
