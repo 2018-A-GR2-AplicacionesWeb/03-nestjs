@@ -1,5 +1,7 @@
-import {Controller, Get, Post, Query, Req, Res} from "@nestjs/common";
+import {Controller, Get, Post, Query, Req, Res, UsePipes} from "@nestjs/common";
 import {Usuario, UsuarioService} from "./usuario.service";
+import {UsuarioPipe} from "../../NEST5/src/usuario/usuario.pipe";
+import {USUARIO_SCHEMA} from "../../NEST5/src/usuario/usuario.schema";
 
 
 @Controller('Usuario')
@@ -9,7 +11,9 @@ export class UsuarioController {
 
     }
 
+
     @Post('crear')
+    @UsePipes(new UsuarioPipe(USUARIO_SCHEMA))
     crearUsuario(
         @Query() queryParametros,
         @Req() request,
