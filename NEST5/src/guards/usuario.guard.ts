@@ -11,19 +11,22 @@ export class UsuarioGuard implements CanActivate {
 
 
     canActivate(
-        context: ExecutionContext):
+        context: ExecutionContext
+    ):
         boolean |
         Promise<boolean> |
-        Observable<boolean> {
+        Observable<boolean>
+    {
         const request = context
             .switchToHttp()
             .getRequest();
+
         console.log('Request', request);
         console.log('Cabeceras', request.headers);
 
-        const reflectorNombreDato = this.reflector
+        const reflectorNecesitaValidacion = this.reflector
             .get(
-                'nombreDato',
+                'necesitaValidacion',
                 context.getHandler()
             );
 
@@ -33,10 +36,38 @@ export class UsuarioGuard implements CanActivate {
                 context.getHandler()
             );
 
-        console.log('reflectorNombreDato', reflectorNombreDato);
-        console.log('reflectorPermisos', reflectorPermisos);
+        // console.log('reflectorNombreDato', reflectorNombreDato);
+        //         // console.log('reflectorPermisos', reflectorPermisos);
 
-        return false;
+
+
+        if(reflectorNecesitaValidacion){
+            // Validar
+
+            // Tomar el valor de la cookie
+
+            // #ID
+
+            // Buscamos en la base los roles del usuario
+
+            // administradores
+
+            // reflector roles 'administradores'
+
+            //
+            // if(tieneRoles){
+            //     return true; // da el acceso
+            // } else {
+            //     return false; // forbidden
+            // }
+            return true;
+
+
+        } else {
+            // No validamos
+            return true;
+        }
+
 
     }
 
