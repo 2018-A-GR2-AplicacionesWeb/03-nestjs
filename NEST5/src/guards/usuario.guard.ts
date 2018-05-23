@@ -44,7 +44,7 @@ export class UsuarioGuard implements CanActivate {
         if(reflectorNecesitaValidacion){
             // Validar
 
-            // Tomar el valor de la cookie
+            // Tomar el valor de la headers
 
             // #ID
 
