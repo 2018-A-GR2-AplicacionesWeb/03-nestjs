@@ -2,6 +2,7 @@ import {ArgumentMetadata, BadRequestException, Injectable, PipeTransform} from '
 import {USUARIO_SCHEMA} from "./usuario.schema";
 
 import * as Joi from 'joi';
+import {PeticionInvalidaException} from "../exceptions/peticion-invalida.exception";
 @Injectable()
 export class UsuarioPipe implements PipeTransform {
     constructor(private readonly schema) {}
@@ -17,7 +18,11 @@ export class UsuarioPipe implements PipeTransform {
             this.schema // un esquema
         );
         if (error) {
-            throw new BadRequestException(error);
+            throw new PeticionInvalidaException(
+                'Peticion invalida',
+                error,
+                4
+            );
         }
         return valorEnBrutoDelRequest;
 
