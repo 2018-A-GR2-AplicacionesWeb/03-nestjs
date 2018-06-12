@@ -36,9 +36,28 @@ export class AuthController {
     }
 
     @Post('verificarSync')
-    verificarTokenSync() {
+    verificarTokenSync(
+        @Body('jwt') jwt
+    ) {
+        const enviaParametros = jwt;
+        if (enviaParametros) {
+            const tokenvalido = this._jwtService
+                .verificarTokenSync(jwt);
+            if (tokenvalido) {
+                return {mensaje: 'Ok'}
+            } else {
+                throw new BadRequestException({
+                    mensaje: 'Token invalido'
+                })
+            }
 
+        } else {
+            throw new BadRequestException({
+                mensaje: 'No envia parametros'
+            })
+        }
     }
+
 
     @Post('verificarAsync')
     verificarTokenAsync() {
