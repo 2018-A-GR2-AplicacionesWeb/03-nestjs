@@ -1,10 +1,10 @@
 import {Injectable} from "@nestjs/common";
 
-const jwtPaquete: any = ('jsonwebtoken');
+const jwtPaquete= require('jsonwebtoken');
 
 @Injectable()
 export class JwtService {
-    private readonly jwt = jwtPaquete;
+    private jwt = jwtPaquete;
     private readonly secreto = 'El sol no quema tanto';
     private readonly opciones = {
         expiresIn: '30s'

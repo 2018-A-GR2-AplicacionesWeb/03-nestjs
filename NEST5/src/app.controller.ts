@@ -1,4 +1,4 @@
-import {Get, Controller, Post, Body} from '@nestjs/common';
+import {Get, Controller, Post, Body, ReflectMetadata} from '@nestjs/common';
 import {AppService} from './app.service';
 import {UsuarioPipe} from "./usuario/usuario.pipe";
 import {USUARIO_SCHEMA} from "./usuario/usuario.schema";
@@ -9,11 +9,13 @@ export class AppController {
     }
 
     @Get()
+    @ReflectMetadata('metodoAsegurado', false)
     root(): string {
         return this.appService.root();
     }
 
     @Post('Crear')
+    @ReflectMetadata('metodoAsegurado', true)
     crear(
         @Body(
             new UsuarioPipe(USUARIO_SCHEMA)) usuario
